@@ -1,27 +1,38 @@
 <?php 
     session_start();
-    include 'comparer.php'; 
-    require 'connect.php';
+    include 'comparer.php';
+    include 'resizer.php'; 
+
     $comparador = new comparadorImg(8); 
 
-    for($i=0;$i<=4;$i++)
+    $result_dif=array(); 
+    $result_sim=array();
+
+    for($i=1; $i<=5;$i++)    
     {
         $al= "alphabet".$i;
-        //echo $al;
       $alphabet=$_SESSION[$al]; 
-       $f1 = 'ideal_img/'.$alphabet.'.jpg'; 
-       $f2 = 'photo/'.$alphabet.'.jpg'; 
-       //var_dump($f1);
-       //var_dump($f2);
-      $hash = $comparador->getHash_img($f1); 
-       echo $hash; 
-       $dif = $comparador->comparar_imgs($f1,$f2); 
+       $ideal = 'processed_ideal/'.$alphabet.'.jpg'; 
+       $uploaded = 'uploaded_photo/'.$alphabet.'.jpg'; 
+       $resizedfile='resized_img/'.$alphabet.'.jpg';
+       smart_resize_image($uploaded,null,450,450,false,$resizedfile,false,false,100);
+
+      $hash = $comparador->getHash_img($ideal); 
+       $dif = $comparador->comparar_imgs($ideal,$resizedfile);
+
+       $result_dif[$i]=$dif;
+       $sim=100-$dif;
+       $result_sim[$i]=$sim;
     
-       echo "<br><img src='".$f1."'><br><br>"; 
-       echo "<img src='".$f2."'><br><br>"; 
+       echo "Ideal Image<br><img src='ideal_img/".$alphabet.".jpg'><br><br>"; 
+       echo " Uploaded Image <img src='uploaded_photo/".$alphabet.".jpg'><br><br>"; 
         
-       echo "<b>Diferencias</b> ".$dif."%<br>"; 
-      echo "<b>Similitudes</b> ".(100-$dif)."%<br>";
+       echo "<b>Differences</b> ".$dif."%<br>"; 
+      echo "<b>Similarities</b> ".(100-$dif)."%<br>";
     }
-    
+
+    $average = array_sum($result_sim) /5;
+    $_SESSION['average'] = $average;
+
+    echo '<form method="post" action="result.php"> <input type="submit">See Result Here</form>'    
 ?> 
