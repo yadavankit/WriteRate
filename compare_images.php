@@ -4,9 +4,27 @@
     require 'connect.php';
     $comparador = new comparadorImg(8); 
 
+    /*for($i=0;$i<=4;$i++)
+    {
+      $alphabet.$i=$_SESSION['alphabet'.$i]; 
+      $f1 = 'ideal_img/'.$alphabet..'.jpg'; 
+      $f2 = 'photo/'.$alphabet.'.jpg'; 
+    }*/
     $alphabet=$_SESSION['alphabet'];
+    /*$alphabet1=$_SESSION['alphabet1'];
+    $alphabet2=$_SESSION['alphabet2'];
+    $alphabet3=$_SESSION['alphabet3'];
+    $alphabet4=$_SESSION['alphabet4'];*/
     $f1 = 'ideal_img/'.$alphabet.'.jpg'; 
-    $f2 = 'photo/'.$alphabet.'.jpg'; 
+    $f2 = 'photo/'.$alphabet.'.jpg';
+    /*$f1 = 'ideal_img/'.$alphabet1.'.jpg'; 
+    $f2 = 'photo/'.$alphabet1.'.jpg';
+    $f1 = 'ideal_img/'.$alphabet2.'.jpg'; 
+    $f2 = 'photo/'.$alphabet2.'.jpg';
+    $f1 = 'ideal_img/'.$alphabet3.'.jpg'; 
+    $f2 = 'photo/'.$alphabet3.'.jpg';
+    $f1 = 'ideal_img/'.$alphabet4.'.jpg'; 
+    $f2 = 'photo/'.$alphabet4.'.jpg'; */
    // var_dump($f1);
     $hash = $comparador->getHash_img($f1); 
     echo $hash; 
