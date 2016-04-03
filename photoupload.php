@@ -21,13 +21,7 @@
 	move_uploaded_file($temp_name2, "photo/$alphabet2.jpg");
 	move_uploaded_file($temp_name3, "photo/$alphabet3.jpg");
 	move_uploaded_file($temp_name4, "photo/$alphabet4.jpg");
-	//$sql="INSERT INTO upload (alphabet) VALUES ('$alphabet')";
-	//$query=mysqli_query($conn,$sql);
-	//if(!$query){
-		//echo "<script>alert('Unable to upload');</script>";
-	//}
-	//else
-	//{
-		header("location:compare_images.php");
-	//}
+	
+	header("location:compare_images.php");
+	
 ?>
