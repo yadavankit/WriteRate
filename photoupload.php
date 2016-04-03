@@ -28,6 +28,6 @@
 	//}
 	//else
 	//{
-		//header("location:compare_images.php");
+		header("location:compare_images.php");
 	//}
 ?>
